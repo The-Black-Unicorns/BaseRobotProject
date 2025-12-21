@@ -1,0 +1,29 @@
+{
+  "NTProvider": {
+    "types": {
+      "/AdvantageKit/RealOutputs/Alerts": "Alerts",
+      "/AdvantageKit/RealOutputs/Arm/Mechanism": "Mechanism2d",
+      "/AdvantageKit/RealOutputs/Elevator/Mechanism": "Mechanism2d",
+      "/AdvantageKit/RealOutputs/PathPlanner": "Alerts",
+      "/AdvantageKit/RealOutputs/PhotonAlerts": "Alerts",
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/Alerts": "Alerts",
+      "/SmartDashboard/Auto Choices": "String Chooser",
+      "/SmartDashboard/Command Scheduler": "Scheduler",
+      "/SmartDashboard/PathPlanner": "Alerts",
+      "/SmartDashboard/PhotonAlerts": "Alerts",
+      "/SmartDashboard/VisionSystemSim-main/Sim Field": "Field2d",
+      "/SmartDashboard/rgtrh": "Command",
+      "/SmartDashboard/sub-Elevator": "Subsystem",
+      "/SmartDashboard/sub-arm": "Subsystem",
+      "/SmartDashboard/sub-drive": "Subsystem",
+      "/SmartDashboard/sub-gripper": "Subsystem"
+    }
+  },
+  "NetworkTables Info": {
+    "visible": true
+  },
+  "NetworkTables View": {
+    "visible": false
+  }
+}
