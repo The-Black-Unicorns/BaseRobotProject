@@ -89,7 +89,7 @@ public class Drive extends SubsystemBase {
 
   // PathPlanner config constants
   private static final double ROBOT_MASS_KG = 45;
-  private static final double ROBOT_MOI = 6.883;
+  private static final double ROBOT_MOI = 4.0;
   private static final double WHEEL_COF = 1.2;
   private static final RobotConfig PP_CONFIG =
       new RobotConfig(
@@ -567,7 +567,7 @@ public class Drive extends SubsystemBase {
     return driveState;
   }
 
-  public boolean isAtAlignSetpoint(double tolerance, double angleTolerance) {
+  public boolean isAtAlignSetpoint(double tolerance, double angleToleranceDegrees) {
     Pose2d currentPose =
         RobotState.getInstance().getEstimatedPose() != null
             ? RobotState.getInstance().getEstimatedPose()
@@ -579,6 +579,6 @@ public class Drive extends SubsystemBase {
 
     return currentPose.getTranslation().getDistance(targetPose.getTranslation()) < tolerance
         && Math.abs(currentPose.getRotation().getDegrees() - targetPose.getRotation().getDegrees())
-            < angleTolerance;
+            < angleToleranceDegrees;
   }
 }

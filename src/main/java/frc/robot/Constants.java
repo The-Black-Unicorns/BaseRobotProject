@@ -70,19 +70,20 @@ public final class Constants {
       Rotation2d.fromDegrees(120)
     };
 
-    public static final Translation2d[] REEF_BRANCHES = {
-      new Translation2d(3.71, 4.19),
-      new Translation2d(3.71, 3.86),
-      new Translation2d(3.96, 3.4),
-      new Translation2d(4.24, 3.27),
-      new Translation2d(4.74, 3.27),
-      new Translation2d(5.02, 3.43),
-      new Translation2d(5.27, 3.86),
-      new Translation2d(5.27, 4.19),
-      new Translation2d(5.02, 4.62),
-      new Translation2d(4.74, 4.78),
-      new Translation2d(4.24, 4.78),
-      new Translation2d(3.96, 4.62)
+    public static final Translation2d[]
+        REEF_BRANCHES = { // right and left as if you are looking at reef
+      new Translation2d(3.71, 4.19), // face 0 left - tag 7
+      new Translation2d(3.71, 3.86), // face 0 right
+      new Translation2d(3.96, 3.4), // face 1 left - tag 8
+      new Translation2d(4.24, 3.27), // face 1 right
+      new Translation2d(4.74, 3.27), // face 2 left - tag 9
+      new Translation2d(5.02, 3.43), // face 2 right
+      new Translation2d(5.27, 3.86), // face 3 left - tag 10
+      new Translation2d(5.27, 4.19), // face 3 right
+      new Translation2d(5.02, 4.62), // face 4 left - tag 11
+      new Translation2d(4.74, 4.78), // face 4 right
+      new Translation2d(4.24, 4.78), // face 5 left - tag 6
+      new Translation2d(3.96, 4.62) // face 5 right
     };
 
     public static class Processor {

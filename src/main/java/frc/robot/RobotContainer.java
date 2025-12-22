@@ -24,6 +24,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.lib.util.AllianceFlipping;
+import frc.robot.SuperStructure.SuperStructureStates;
+import frc.robot.autonomous.AutoTest;
 import frc.robot.controllers.ControllerInterface;
 import frc.robot.controllers.SimulationController;
 import frc.robot.controllers.SingleXboxController;
@@ -193,7 +195,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return autoChooser.get();
+    // return autoChooser.get();
+    return new AutoTest(drive, leds);
   }
 
   public void periodic() {
@@ -225,6 +228,7 @@ public class RobotContainer {
   }
 
   public void autonomousInit() {
+    structure.setWantedState(SuperStructureStates.AUTO);
     if (Constants.currentMode != Constants.Mode.SIM) return;
 
     // Reset the simulation to the initial pose
