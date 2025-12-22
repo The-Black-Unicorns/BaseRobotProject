@@ -144,8 +144,8 @@ public class VisionIOPhoton implements VisionIO {
         poseObservations.add(
             new PoseObservation(
                 result.getTimestampSeconds(), // Timestamp
-                // new Pose3d(robotPose), // 3D pose estimate
-                robotPose1,
+                new Pose3d(robotPose), // 3D pose estimate
+                // robotPose1,
                 target.poseAmbiguity, // Ambiguity
                 1, // Tag count
                 distance, // Average tag distance

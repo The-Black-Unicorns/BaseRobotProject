@@ -1,33 +1,33 @@
 package frc.robot.controllers;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class TwoControllers implements ControllerInterface {
 
-  private final XboxController controller;
+  private final GenericHID controller;
 
   public TwoControllers() {
-    controller = new XboxController(0);
+    controller = new GenericHID(0);
   }
 
   @Override
   public Trigger resetGyroButton() {
-    return new Trigger(() -> controller.getRawButton(8) && controller.getPOV() == 0.0);
+    return new Trigger(() -> controller.getRawButton(3));
   }
 
   @Override
   public double xVelocityAnalog() {
-    return controller.getLeftX();
+    return controller.getRawAxis(3);
   }
 
   @Override
   public double yVelocityAnalog() {
-    return -controller.getLeftY();
+    return -controller.getRawAxis(2);
   }
 
   @Override
   public double rotationVelocityAnalog() {
-    return controller.getRightX();
+    return controller.getRawAxis(0);
   }
 }

@@ -61,10 +61,11 @@ public class AutoTest extends Command {
   public void execute() {
     switch (currentState) {
       case START:
-        currentState = AutoStates.DRIVE1;
+        currentState = AutoStates.ALIGN1;
         break;
       case ALIGN1:
         drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_ALIGN_POSES[5])));
+        System.out.println(AllianceFlipping.apply(CORAL_ALIGN_POSES[5]));
         if (drive.isAtAlignSetpoint(0.06, 3)) currentState = AutoStates.ALIGN_REEF1;
         break;
       case ALIGN_REEF1:

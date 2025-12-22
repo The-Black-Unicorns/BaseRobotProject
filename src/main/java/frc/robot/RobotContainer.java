@@ -28,7 +28,7 @@ import frc.robot.SuperStructure.SuperStructureStates;
 import frc.robot.autonomous.AutoTest;
 import frc.robot.controllers.ControllerInterface;
 import frc.robot.controllers.SimulationController;
-import frc.robot.controllers.SingleXboxController;
+import frc.robot.controllers.TwoControllers;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.DriveConstants;
@@ -77,7 +77,7 @@ public class RobotContainer {
     switch (Constants.currentMode) {
       case REAL:
         // Real robot, instantiate hardware IO implementations
-        controller = new SingleXboxController();
+        controller = new TwoControllers();
         drive =
             new Drive(
                 new GyroIONavX(),
@@ -94,9 +94,9 @@ public class RobotContainer {
         vision =
             new Vision(
                 robotState::addVisionObservation,
-                new VisionIO[] {
+                new VisionIO[] {new VisionIOPhoton("camera0", VisionConstants.robotToCamera0)
                   /*
-                  new VisionIOPhoton("camera0", VisionConstants.robotToCamera0),
+                  ,
                   new VisionIOPhoton("camera1", VisionConstants.robotToCamera1),
                   new VisionIOLimelight("limelight-tsachi", RobotState.getInstance()::getYaw)*/
                 });
