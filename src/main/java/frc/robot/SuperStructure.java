@@ -20,6 +20,7 @@ import org.littletonrobotics.junction.AutoLogOutput;
 public class SuperStructure extends SubsystemBase {
 
   public enum SuperStructureStates {
+    AUTO,
     TRAVEL
   }
 
@@ -64,6 +65,10 @@ public class SuperStructure extends SubsystemBase {
     // TODO: add logic with algae in gripper
 
     return switch (wantedState) {
+      case AUTO -> {
+        yield SuperStructureStates.AUTO;
+      }
+
       case TRAVEL -> {
         yield SuperStructureStates.TRAVEL;
       }
@@ -77,9 +82,19 @@ public class SuperStructure extends SubsystemBase {
 
   private void stateMachine() {
     switch (currentState) {
+      case AUTO -> auto();
+
       case TRAVEL -> travel();
 
       default -> {}
+    }
+  }
+
+  private void auto() {
+    if (currentState != previousState) {
+      if (currentCommand != null) currentCommand.cancel();
+      // currentCommand = new AutoTest(drive, leds);
+      // currentCommand.schedule();
     }
   }
 
@@ -89,7 +104,7 @@ public class SuperStructure extends SubsystemBase {
     leds.setState(ledsStates.OFF);
   }
 
-  private void setWantedState(SuperStructureStates wantedState) {
+  public void setWantedState(SuperStructureStates wantedState) {
     this.wantedState = wantedState;
   }
 
