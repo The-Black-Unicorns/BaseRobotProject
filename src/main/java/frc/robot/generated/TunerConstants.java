@@ -142,8 +142,8 @@ public class TunerConstants {
       Rotations.of(-0.86 + 0.5); // Degrees.of(310);
   private static final boolean kFrontLeftSteerMotorInverted = true;
   private static final boolean kFrontLeftEncoderInverted = false;
-  private static final Distance kFrontLeftXPos = Inches.of(8.2);
-  private static final Distance kFrontLeftYPos = Inches.of(8.2);
+  private static final Distance kFrontLeftXPos = Centimeters.of(20.5);
+  private static final Distance kFrontLeftYPos = Centimeters.of(20.5);
 
   // Front Right
   private static final int kFrontRightDriveMotorId = 21;
@@ -154,8 +154,8 @@ public class TunerConstants {
   private static final boolean kFrontRightSteerMotorInverted = true;
   private static final boolean kFrontRightEncoderInverted = false;
 
-  private static final Distance kFrontRightXPos = Inches.of(8.2);
-  private static final Distance kFrontRightYPos = Inches.of(-8.2);
+  private static final Distance kFrontRightXPos = Centimeters.of(20.5);
+  private static final Distance kFrontRightYPos = Centimeters.of(-20.5);
 
   // Back Left
   private static final int kBackLeftDriveMotorId = 31;
@@ -166,8 +166,8 @@ public class TunerConstants {
   private static final boolean kBackLeftSteerMotorInverted = true;
   private static final boolean kBackLeftEncoderInverted = false;
 
-  private static final Distance kBackLeftXPos = Inches.of(-8.2);
-  private static final Distance kBackLeftYPos = Inches.of(8.2);
+  private static final Distance kBackLeftXPos = Centimeters.of(-20.5);
+  private static final Distance kBackLeftYPos = Centimeters.of(20.5);
 
   // Back Right
   private static final int kBackRightDriveMotorId = 41;
@@ -178,8 +178,8 @@ public class TunerConstants {
   private static final boolean kBackRightSteerMotorInverted = true;
   private static final boolean kBackRightEncoderInverted = false;
 
-  private static final Distance kBackRightXPos = Inches.of(-8.2);
-  private static final Distance kBackRightYPos = Inches.of(-8.2);
+  private static final Distance kBackRightXPos = Centimeters.of(-20.5);
+  private static final Distance kBackRightYPos = Centimeters.of(-20.5);
 
   public static final SwerveModuleConstants<
           TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>
