@@ -31,7 +31,7 @@ import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
@@ -42,13 +42,13 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.lib.util.LocalADStarAK;
 import frc.robot.Constants;
@@ -141,12 +141,8 @@ public class Drive extends SubsystemBase {
 
   private double lastBigRotation;
 
-  private final ProfiledPIDController linearVelocityController =
-      new ProfiledPIDController(
-          0.0001, 0, 0, new Constraints(getMaxLinearSpeedMetersPerSec(), 5)); // kp 1.2
-  private final ProfiledPIDController rotationController =
-      new ProfiledPIDController(
-          0.5, 0, 0, new Constraints(getMaxAngularSpeedRadPerSec(), 50)); // kp 0.8
+  private final PIDController linearVelocityController = new PIDController(4.3, 0, 0); // kp 1.2
+  private final PIDController rotationController = new PIDController(0.14, 0, 0); // kp 0.8
 
   public Drive(
       GyroIO gyroIO,
@@ -161,7 +157,7 @@ public class Drive extends SubsystemBase {
 
     lastBigRotation = RobotController.getFPGATime() * 1e-6;
     rotationController.enableContinuousInput(0, 360);
-    rotationController.setTolerance(1);
+    rotationController.setTolerance(2);
 
     this.gyroIO = gyroIO;
     modules[0] = new Module(flModuleIO, 0, TunerConstants.FrontLeft);
@@ -383,13 +379,26 @@ public class Drive extends SubsystemBase {
         Translation2d linearVelocityTranslation =
             new Translation2d(
                 linearVelocity, new Rotation2d(Math.atan2(distance.getY(), distance.getX())));
+        SmartDashboard.putNumber("linear", linearVelocity);
+        Logger.recordOutput("linearTranslation", linearVelocityTranslation);
+        double rot =
+            rotationController.calculate(
+                (RobotState.getInstance().getEstimatedPose().getRotation().getDegrees() % 360 + 360)
+                    % 360,
+                (autoAlignTarget.get().getRotation().getDegrees() % 360 + 360) % 360);
+        SmartDashboard.putNumber(
+            "real", RobotState.getInstance().getEstimatedPose().getRotation().getDegrees());
+        SmartDashboard.putNumber("rot", rot);
+        SmartDashboard.putNumber(
+            "measurement",
+            (RobotState.getInstance().getEstimatedPose().getRotation().getDegrees() % 360 + 360)
+                % 360);
+        SmartDashboard.putNumber(
+            "setpoint", (autoAlignTarget.get().getRotation().getDegrees() % 360 + 360) % 360);
+
         runVelocity(
             new ChassisSpeeds(
-                linearVelocityTranslation.getX(),
-                linearVelocityTranslation.getY(),
-                rotationController.calculate(
-                    RobotState.getInstance().getEstimatedPose().getRotation().getDegrees(),
-                    autoAlignTarget.get().getRotation().getDegrees())));
+                linearVelocityTranslation.getX(), linearVelocityTranslation.getY(), rot));
         break;
       default:
         System.out.println("Drive subsystem is really broken");

@@ -64,12 +64,11 @@ public class AutoTest extends Command {
         currentState = AutoStates.ALIGN1;
         break;
       case ALIGN1:
-        drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_ALIGN_POSES[5])));
-        System.out.println(AllianceFlipping.apply(CORAL_ALIGN_POSES[5]));
+        drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_ALIGN_POSES[4])));
         if (drive.isAtAlignSetpoint(0.06, 3)) currentState = AutoStates.ALIGN_REEF1;
         break;
       case ALIGN_REEF1:
-        drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_SCORE_POSES[5])));
+        drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_SCORE_POSES[4])));
         if (drive.isAtAlignSetpoint(0.03, 3)) {
           currentState = AutoStates.PLACE1;
           timer.reset();
@@ -96,16 +95,16 @@ public class AutoTest extends Command {
         drive.setStateAutoAlign(
             () -> AllianceFlipping.apply(new Pose2d(2, 2, Rotation2d.fromDegrees(60))));
         if (drive.isAtAlignSetpoint(0.05, 2)) {
-          currentState = AutoStates.DRIVE2;
+          currentState = AutoStates.ALIGN2;
           timer.reset();
         }
         break;
       case ALIGN2:
-        drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_ALIGN_POSES[4])));
+        drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_ALIGN_POSES[3])));
         if (drive.isAtAlignSetpoint(0.06, 3)) currentState = AutoStates.ALIGN_REEF2;
         break;
       case ALIGN_REEF2:
-        drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_SCORE_POSES[4])));
+        drive.setStateAutoAlign(() -> (AllianceFlipping.apply(CORAL_SCORE_POSES[3])));
         if (drive.isAtAlignSetpoint(0.03, 3)) {
           currentState = AutoStates.PLACE2;
           timer.reset();

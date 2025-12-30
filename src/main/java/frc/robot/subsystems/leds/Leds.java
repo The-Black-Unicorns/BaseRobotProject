@@ -35,7 +35,7 @@ public class Leds extends SubsystemBase {
   @AutoLogOutput(key = "leds/ledsState")
   private ledsStates currentState = ledsStates.OFF;
 
-  private final AddressableLED addressableLEDs = new AddressableLED(0);
+  private final AddressableLED addressableLEDs = new AddressableLED(8);
   private final AddressableLEDBuffer ledBuffer = new AddressableLEDBuffer(150);
 
   public Leds() {
